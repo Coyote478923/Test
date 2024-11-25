@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Protected Website</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #121212; /* Dark background */
+      color: #ffffff; /* White text */
+      height: 100vh;
+      overflow: hidden;
+    }
+    #login, #content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #121212;
+    }
+    #login {
+      background-color: #121212;
+    }
+    #content {
+      display: none;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #b71c1c; /* Red border */
+      margin: 10px 0;
+      font-size: 16px;
+      background-color: #1e1e1e; /* Match container background */
+      color: #ffffff;
+    }
+    button {
+      background-color: #b71c1c; /* Bright red for the button */
+      color: white;
+      font-size: 16px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background-color: #ff4444; /* Lighter red on hover */
+    }
+    h1 {
+      color: #ff4444; /* Accent red for titles */
+    }
+    #sidebar {
+      background-color: #1e1e1e;
+      width: 200px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 0;
+      box-shadow: 4px 0 10px rgba(0, 0, 0, 0.4);
+    }
+    .tab {
+      color: white;
+      padding: 15px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      border-bottom: 1px solid #333;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .tab:hover {
+      background-color: #b71c1c;
+    }
+    .tab.active {
+      background-color: #ff4444;
+    }
+    #main-content {
+      margin-left: 200px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .subpage {
+      display: none;
+      text-align: center;
+    }
+    .subpage.active {
+      display: block;
+    }
+    #error-message {
+      display: none; /* Hide error message by default */
+    }
+  </style>
+</head>
+<body>
+  <!-- Password Screen -->
+  <div id="login">
+    <div>
+      <h1>Enter Password</h1>
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="checkPassword()">Submit</button>
+      <p id="error-message" style="color: #ff4444;">Incorrect Password!</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div id="content">
+    <div id="sidebar">
+      <div class="tab active" onclick="showSubpage('main')">Main</div>
+      <div class="tab" onclick="showSubpage('1')">1</div>
+      <div class="tab" onclick="showSubpage('2')">2</div>
+      <div class="tab" onclick="showSubpage('3')">3</div>
+      <div class="tab" onclick="showSubpage('4')">4</div>
+      <div class="tab" onclick="showSubpage('5')">5</div>
+      <div class="tab" onclick="showSubpage('6')">6</div>
+      <div class="tab" onclick="showSubpage('7')">7</div>
+      <div class="tab" onclick="showSubpage('8')">8</div>
+      <div class="tab" onclick="showSubpage('9')">9</div>
+      <div class="tab" onclick="showSubpage('10')">10</div>
+      <div class="tab" onclick="showSubpage('11')">11</div>
+      <div class="tab" onclick="showSubpage('12')">12</div>
+    </div>
+    <div id="main-content">
+      <div id="main" class="subpage active">
+        <h1>Coyote4789</h1>
+        <p>Welcome to the Fullscreen Main Page!</p>
+      </div>
+      <div id="1" class="subpage">
+        <h1>Page 1</h1>
+        <p>Content for page 1.</p>
+      </div>
+      <div id="2" class="subpage">
+        <h1>Page 2</h1>
+        <p>Content for page 2.</p>
+      </div>
+      <!-- Repeat for other pages -->
+      <div id="12" class="subpage">
+        <h1>Page 12</h1>
+        <p>Content for page 12.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const correctPassword = "eraser7777"; // Set your password here
+
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      const errorMessage = document.getElementById("error-message");
+      if (input === correctPassword) {
+        document.getElementById("login").style.display = "none"; // Hide login box
+        document.getElementById("content").style.display = "flex"; // Show the main content
+      } else {
+        errorMessage.style.display = "block"; // Show error message on incorrect password
+      }
+    }
+
+    function showSubpage(id) {
+      // Hide all subpages
+      document.querySelectorAll('.subpage').forEach(page => page.classList.remove('active'));
+      // Remove active state from all tabs
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      // Show the selected subpage
+      document.getElementById(id).classList.add('active');
+      // Highlight the active tab
+      document.querySelector(`.tab[onclick="showSubpage('${id}')"]`).classList.add('active');
+    }
+  </script>
+</body>
+</html>
